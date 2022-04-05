@@ -1,0 +1,6 @@
+/home/seyyitgenc/Projects/ToDoList/ToDoList/bin/Debug/ToDoList.exe
+/home/seyyitgenc/Projects/ToDoList/ToDoList/bin/Debug/ToDoList.pdb
+/home/seyyitgenc/Projects/ToDoList/ToDoList/obj/x86/Debug/ToDoList.csprojAssemblyReference.cache
+/home/seyyitgenc/Projects/ToDoList/ToDoList/obj/x86/Debug/ToDoList.csproj.CoreCompileInputs.cache
+/home/seyyitgenc/Projects/ToDoList/ToDoList/obj/x86/Debug/ToDoList.exe
+/home/seyyitgenc/Projects/ToDoList/ToDoList/obj/x86/Debug/ToDoList.pdb
