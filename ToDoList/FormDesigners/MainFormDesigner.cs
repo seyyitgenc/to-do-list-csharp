@@ -26,7 +26,7 @@ namespace ToDoList
             this.Padding = new Padding(2, 0, 2, 2);
             this.BackColor = Color.CornflowerBlue;
             this.FormBorderStyle = FormBorderStyle.None;
-            this.Load+=Handle_Load;
+            this.Load += Handle_Load;
 
             //Panel Customization
             pnl_Content = new Panel
@@ -79,6 +79,10 @@ namespace ToDoList
                 Text = "Main Form",
                 TextAlign = ContentAlignment.MiddleCenter,
             };
+
+            //Calendar Customization
+            calendar.Width = 400;
+            calendar.Height = 350;
 
             //Event Handlers
             btn_Close.Click += Btn_Close_Click;

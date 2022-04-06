@@ -9,7 +9,6 @@ namespace ToDoList
     {
         private bool mouseDownTitle;
         private Point lastLocationTitle;
-        CustomCalendar cc = new CustomCalendar();
 
         //constructor
         public MainForm()
