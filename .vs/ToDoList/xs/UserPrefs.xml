@@ -1,11 +1,7 @@
 ﻿<Properties StartupConfiguration="{4B2F66FE-331B-46C9-BD96-B23BA993246F}|Default">
-  <MonoDevelop.Ide.Workbench ActiveDocument="ToDoList/CustomControls/CustomCalendarDesigner.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="ToDoList/CustomControls/CustomCalendar.cs">
     <Files>
-      <File FileName="ToDoList/CustomControls/CustomCalendarDesigner.cs" Line="76" Column="13" />
-      <File FileName="ToDoList/CustomControls/CustomCalendar.cs" Line="15" Column="27" />
-      <File FileName="ToDoList/MainForm.cs" Line="11" Column="41" />
-      <File FileName="ToDoList/FormDesigners/MainFormDesigner.cs" Line="84" Column="35" />
-      <File FileName="ToDoList/Program.cs" Line="8" Column="39" />
+      <File FileName="ToDoList/CustomControls/CustomCalendar.cs" Line="97" Column="36" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -13,7 +9,7 @@
           <Node name="ToDoList" expanded="True">
             <Node name="ToDoList" expanded="True">
               <Node name="CustomControls" expanded="True">
-                <Node name="CustomCalendarDesigner.cs" selected="True" />
+                <Node name="CustomCalendar.cs" selected="True" />
               </Node>
               <Node name="FormDesigners" expanded="True" />
             </Node>

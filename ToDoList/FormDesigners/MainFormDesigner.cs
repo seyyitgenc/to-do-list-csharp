@@ -82,7 +82,7 @@ namespace ToDoList
 
             //Calendar Customization
             calendar.Width = 400;
-            calendar.Height = 350;
+            calendar.Height = 500;
 
             //Event Handlers
             btn_Close.Click += Btn_Close_Click;
