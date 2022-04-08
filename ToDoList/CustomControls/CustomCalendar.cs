@@ -10,13 +10,14 @@ namespace ToDoList
     {
         //fields
         DateTime date = DateTime.Now;
+        DateTime pre;
 
         private int _rowCount;
         int LocationX = 0;
         int LocationY = 30;
 
         int PreMonthDays;
-        string[] Days = DateTimeFormatInfo.CurrentInfo.DayNames;
+        string[] Days = { "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun" };
 
         public CustomCalendar()
         {
@@ -44,8 +45,8 @@ namespace ToDoList
                 Panel pnl_DayName = new Panel();
                 //dynamic label
                 lbl_DayName.Name = "DayName" + i;
-                lbl_DayName.Text = TruncateAtWord(Days[i], 3);
                 lbl_DayName.Dock = DockStyle.Fill;
+                lbl_DayName.Text = Days[i];
                 lbl_DayName.TextAlign = ContentAlignment.MiddleCenter;
                 //dynamic panel
                 if (i == 0)
@@ -106,18 +107,19 @@ namespace ToDoList
             int CurrentDay = DateTime.Now.Day;
             int CurrentMonth = DateTime.Now.Month;
             int CurrentYear = DateTime.Now.Year;
-            if (date.Month > 1)
-                PreMonthDays = DateTime.DaysInMonth(date.Year, date.Month - 1);
+
             int NextMonthDays = 1;
 
+            if (date.Month > 1)
+                PreMonthDays = DateTime.DaysInMonth(date.Year, date.Month - 1);
+            PreMonthDays = PreMonthDays - firstdayofWeek + 2;
 
-            PreMonthDays = PreMonthDays - firstdayofWeek + 1;
-            for (int i = 7; i <= pnl_Content.Controls.Count - 1; i++)
+            for (int i = 8; i <= pnl_Content.Controls.Count - 1; i++)
             {
                 Panel p = pnl_Content.Controls[i] as Panel;
                 Label l = p.Controls[0] as Label;
 
-                if (i - 6 <= firstdayofWeek)
+                if (i - 7 <= firstdayofWeek - 1)
                 {
                     p.BackColor = Color.HotPink;
                     l.Text = PreMonthDays.ToString();
@@ -131,6 +133,14 @@ namespace ToDoList
                     p.Enabled = false;
                     NextMonthDays++;
                 }
+                else if (firstdayofWeek == 0)
+                {
+                    p.BackColor = Color.Transparent;
+                    p.Visible = true;
+                    p.Enabled = true;
+                    l.Text = (i - firstdayofWeek - 7).ToString();
+                    DayCount--;
+                }
                 else
                 {
                     p.BackColor = Color.Transparent;
@@ -140,7 +150,7 @@ namespace ToDoList
                     DayCount--;
                 }
                 //Current Day
-                if (p.Name == ("PnlDays" + (CurrentDay + firstdayofWeek)) && CurrentMonth == date.Month && CurrentYear == date.Year)
+                if (p.Name == ("PnlDays" + (CurrentDay + firstdayofWeek - 1)) && CurrentMonth == date.Month && CurrentYear == date.Year)
                     p.BackColor = Color.Red;
             }
         }
@@ -153,18 +163,13 @@ namespace ToDoList
         //Linklabel Click
         void LinkLbl_Left_Click(object sender, EventArgs e)
         {
-            if (date.Month == 1)
-                PreMonthDays = DateTime.DaysInMonth(date.Year - 1, date.Month + 11);
+            if (date.Month == 2)
+            {
+                pre = date.AddYears(-1);
+                PreMonthDays = DateTime.DaysInMonth(pre.Year, pre.Month + 10);
+            }
             date = date.AddMonths(-1);
             reValue_Panels();
-        }
-        //truncate string
-        public string TruncateAtWord(string input, int length)
-        {
-            if (input == null || input.Length < length)
-                return input;
-            int iNextSpace = input.LastIndexOf(" ", length, StringComparison.Ordinal);
-            return string.Format("{0}…", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
         }
         //Change BackColor of DayNum parent
         void Lbl_DayNum_Click(object sender, EventArgs e)
@@ -175,7 +180,8 @@ namespace ToDoList
             else
                 lbl.Parent.BackColor = Color.Red;
         }
-        //Change BackColor of DayNum panel
+        //Change BackColor of DayNum parent
+
         void Pnl_Day_Click(object sender, EventArgs e)
         {
             Panel pnl = (Panel)sender;

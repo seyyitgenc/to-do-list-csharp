@@ -15,12 +15,12 @@ namespace ToDoList
 
         private Label lbl_Date;
         private Label lbl_Year;
+        private Button btn_send = new Button();
 
         void Render()
         {
             //control customization
             this.BackColor = Color.CornflowerBlue;
-
 
             //panel customization
             pnl_Top = new Panel
@@ -73,12 +73,17 @@ namespace ToDoList
                 AutoSize = true,
             };
 
+            btn_send.Location = new Point(300, 400);
+            btn_send.Text = "test";
+
             linkLbl_Left.Click+=LinkLbl_Left_Click;
             linkLbl_Right.Click+=LinkLbl_Right_Click;
 
             this.Load += Handle_Load;
             this.Controls.Add(pnl_Content);
             this.Controls.Add(pnl_Top);
+
+            pnl_Content.Controls.Add(btn_send);
 
             pnl_Top.Controls.Add(lbl_Year);
             pnl_Top.Controls.Add(lbl_Date);
