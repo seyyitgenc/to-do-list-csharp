@@ -1,7 +1,8 @@
 ﻿<Properties StartupConfiguration="{4B2F66FE-331B-46C9-BD96-B23BA993246F}|Default">
   <MonoDevelop.Ide.Workbench ActiveDocument="ToDoList/CustomControls/CustomCalendar.cs">
     <Files>
-      <File FileName="ToDoList/CustomControls/CustomCalendar.cs" Line="97" Column="36" />
+      <File FileName="ToDoList/CustomControls/CustomCalendar.cs" Line="13" Column="1" />
+      <File FileName="ToDoList/CustomControls/CustomCalendarDesigner.cs" Line="17" Column="32" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -15,9 +16,6 @@
             </Node>
           </Node>
         </State>
-      </Pad>
-      <Pad Id="MonoDevelop.Debugger.WatchPad">
-        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

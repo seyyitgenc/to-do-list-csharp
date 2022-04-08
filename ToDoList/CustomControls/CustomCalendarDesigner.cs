@@ -14,6 +14,7 @@ namespace ToDoList
         private LinkLabel linkLbl_Right;
 
         private Label lbl_Date;
+        private Label lbl_Year;
 
         void Render()
         {
@@ -59,7 +60,14 @@ namespace ToDoList
             //label customization
             lbl_Date = new Label
             {
-                Location = new Point(140, 0),
+                Text = "test",
+                Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point),
+                AutoSize = true,
+            };
+
+            lbl_Year = new Label
+            {
+                Location = new Point(330, 5),
                 Text = "test",
                 Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point),
                 AutoSize = true,
@@ -72,12 +80,10 @@ namespace ToDoList
             this.Controls.Add(pnl_Content);
             this.Controls.Add(pnl_Top);
 
+            pnl_Top.Controls.Add(lbl_Year);
             pnl_Top.Controls.Add(lbl_Date);
             pnl_Top.Controls.Add(linkLbl_Right);
             pnl_Top.Controls.Add(linkLbl_Left);
         }
-
-       
-
     }
 }

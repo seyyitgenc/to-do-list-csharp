@@ -15,7 +15,7 @@ namespace ToDoList
         int LocationX = 0;
         int LocationY = 30;
 
-        string[] Months = DateTimeFormatInfo.CurrentInfo.MonthNames;
+        int PreMonthDays;
         string[] Days = DateTimeFormatInfo.CurrentInfo.DayNames;
 
         public CustomCalendar()
@@ -25,8 +25,8 @@ namespace ToDoList
         //Load Event
         void Handle_Load(object sender, EventArgs e)
         {
-            linkLbl_Left.Location = new Point(((pnl_Top.Width - linkLbl_Left.Width) / 2) - 100, 5);
-            linkLbl_Right.Location = new Point(((pnl_Top.Width - linkLbl_Right.Width) / 2) + 100, 5);
+            linkLbl_Left.Location = new Point(((pnl_Top.Width - linkLbl_Left.Width) / 2) - 70, 5);
+            linkLbl_Right.Location = new Point(((pnl_Top.Width - linkLbl_Right.Width) / 2) + 70, 5);
             Generate_Panels();
             reValue_Panels();
         }
@@ -35,7 +35,7 @@ namespace ToDoList
         {
             LocationY = 30;
             _rowCount = this.Width / 52;
-            int padding = ((this.Width - (50 * _rowCount) - (1 * (_rowCount-1)))) / 2;
+            int padding = ((this.Width - (50 * _rowCount) - (1 * (_rowCount - 1)))) / 2;
 
             //Dynamic Day Names
             for (int i = 0; i < 7; i++)
@@ -84,6 +84,7 @@ namespace ToDoList
                 }
                 //dynamic label
                 lbl_DayNum.Name = "LblDayNumber" + i;
+                lbl_DayNum.Click += Lbl_DayNum_Click;
                 pnl_Content.Controls.Add(pnl_Day);//panel
                 pnl_Day.Controls.Add(lbl_DayNum);//label
                 LocationX += 51;
@@ -92,8 +93,9 @@ namespace ToDoList
         void reValue_Panels()
         {
             //Month Names
-            lbl_Date.Text = Months[date.Month - 1];
+            lbl_Date.Text = date.ToString("MMMM");
             lbl_Date.Location = new Point((pnl_Top.Width - lbl_Date.Width) / 2, 5);
+            lbl_Year.Text = date.Year.ToString();
 
             Panel pnl_Day = new Panel();
             Label lbl_DayNum = new Label();
@@ -101,16 +103,33 @@ namespace ToDoList
             DateTime firstdayofMonth = new DateTime(date.Year, date.Month, 1);
             int DayCount = DateTime.DaysInMonth(date.Year, date.Month);
             int firstdayofWeek = Convert.ToInt32(firstdayofMonth.DayOfWeek);
+            int CurrentDay = DateTime.Now.Day;
+            int CurrentMonth = DateTime.Now.Month;
+            int CurrentYear = DateTime.Now.Year;
+            if (date.Month > 1)
+                PreMonthDays = DateTime.DaysInMonth(date.Year, date.Month - 1);
+            int NextMonthDays = 1;
 
+
+            PreMonthDays = PreMonthDays - firstdayofWeek + 1;
             for (int i = 7; i <= pnl_Content.Controls.Count - 1; i++)
             {
                 Panel p = pnl_Content.Controls[i] as Panel;
                 Label l = p.Controls[0] as Label;
 
-                if (i - 6 <= firstdayofWeek || DayCount == 0)
+                if (i - 6 <= firstdayofWeek)
                 {
                     p.BackColor = Color.HotPink;
-                    l.Text = "";
+                    l.Text = PreMonthDays.ToString();
+                    p.Enabled = false;
+                    PreMonthDays++;
+                }
+                else if (DayCount == 0)
+                {
+                    p.BackColor = Color.HotPink;
+                    l.Text = NextMonthDays.ToString();
+                    p.Enabled = false;
+                    NextMonthDays++;
                 }
                 else
                 {
@@ -120,6 +139,9 @@ namespace ToDoList
                     l.Text = (i - firstdayofWeek - 6).ToString();
                     DayCount--;
                 }
+                //Current Day
+                if (p.Name == ("PnlDays" + (CurrentDay + firstdayofWeek)) && CurrentMonth == date.Month && CurrentYear == date.Year)
+                    p.BackColor = Color.Red;
             }
         }
         //Linklabel Click
@@ -131,6 +153,8 @@ namespace ToDoList
         //Linklabel Click
         void LinkLbl_Left_Click(object sender, EventArgs e)
         {
+            if (date.Month == 1)
+                PreMonthDays = DateTime.DaysInMonth(date.Year - 1, date.Month + 11);
             date = date.AddMonths(-1);
             reValue_Panels();
         }
@@ -142,6 +166,16 @@ namespace ToDoList
             int iNextSpace = input.LastIndexOf(" ", length, StringComparison.Ordinal);
             return string.Format("{0}…", input.Substring(0, (iNextSpace > 0) ? iNextSpace : length).Trim());
         }
+        //Change BackColor of DayNum parent
+        void Lbl_DayNum_Click(object sender, EventArgs e)
+        {
+            Label lbl = (Label)sender;
+            if (lbl.Parent.BackColor == Color.Red)
+                lbl.Parent.BackColor = Color.Transparent;
+            else
+                lbl.Parent.BackColor = Color.Red;
+        }
+        //Change BackColor of DayNum panel
         void Pnl_Day_Click(object sender, EventArgs e)
         {
             Panel pnl = (Panel)sender;
