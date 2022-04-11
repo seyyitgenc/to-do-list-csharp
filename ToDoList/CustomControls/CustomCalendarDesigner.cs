@@ -67,7 +67,6 @@ namespace ToDoList
 
             lbl_Year = new Label
             {
-                Location = new Point(330, 5),
                 Text = "test",
                 Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point),
                 AutoSize = true,

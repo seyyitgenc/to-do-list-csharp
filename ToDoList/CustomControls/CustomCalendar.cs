@@ -26,8 +26,8 @@ namespace ToDoList
         //Load Event
         void Handle_Load(object sender, EventArgs e)
         {
-            linkLbl_Left.Location = new Point(((pnl_Top.Width - linkLbl_Left.Width) / 2) - 70, 5);
-            linkLbl_Right.Location = new Point(((pnl_Top.Width - linkLbl_Right.Width) / 2) + 70, 5);
+            linkLbl_Left.Location = new Point(((pnl_Top.Width - linkLbl_Left.Width) / 2) - 100, 5);
+            linkLbl_Right.Location = new Point(((pnl_Top.Width - linkLbl_Right.Width) / 2) + 100, 5);
             Generate_Panels();
             reValue_Panels();
         }
@@ -35,8 +35,8 @@ namespace ToDoList
         void Generate_Panels()
         {
             LocationY = 30;
-            _rowCount = this.Width / 52;
-            int padding = ((this.Width - (50 * _rowCount) - (1 * (_rowCount - 1)))) / 2;
+            _rowCount = 7;
+            int padding = ((this.Width - (40 * _rowCount) - (1 * (_rowCount - 1)))) / 2;
 
             //Dynamic Day Names
             for (int i = 0; i < 7; i++)
@@ -53,11 +53,11 @@ namespace ToDoList
                     LocationX = padding;
 
                 pnl_DayName.Location = new Point(LocationX, 0);
-                pnl_DayName.Size = new Size(51, 20);
+                pnl_DayName.Size = new Size(41, 20);
                 pnl_DayName.Name = "PnlDayName" + i;
                 pnl_DayName.Controls.Add(lbl_DayName);
                 pnl_Content.Controls.Add(pnl_DayName);
-                LocationX += 51;
+                LocationX += 41;
             }
             LocationX = 0;
 
@@ -76,27 +76,28 @@ namespace ToDoList
                     LocationX = padding;
 
                 pnl_Day.Location = new Point(LocationX, LocationY);
-                pnl_Day.Size = new Size(50, 50);
+                pnl_Day.Size = new Size(40, 40);
 
                 if (i % _rowCount == 0)
                 {
-                    LocationX = padding - 51;
-                    LocationY += 51;
+                    LocationX = padding - 41;
+                    LocationY += 41;
                 }
                 //dynamic label
                 lbl_DayNum.Name = "LblDayNumber" + i;
                 lbl_DayNum.Click += Lbl_DayNum_Click;
                 pnl_Content.Controls.Add(pnl_Day);//panel
                 pnl_Day.Controls.Add(lbl_DayNum);//label
-                LocationX += 51;
+                LocationX += 41;
             }
         }
         void reValue_Panels()
         {
             //Month Names
             lbl_Date.Text = date.ToString("MMMM");
-            lbl_Date.Location = new Point((pnl_Top.Width - lbl_Date.Width) / 2, 5);
+            lbl_Date.Location = new Point((pnl_Top.Width - lbl_Date.Width - 70) / 2, 5);
             lbl_Year.Text = date.Year.ToString();
+            lbl_Year.Location = new Point((pnl_Top.Width - lbl_Year.Width + 90) / 2, 5);
 
             Panel pnl_Day = new Panel();
             Label lbl_DayNum = new Label();
